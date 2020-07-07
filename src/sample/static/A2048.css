@@ -1,0 +1,35 @@
+.game-board {
+    -fx-border-style: solid inside;
+    -fx-border-width: 0.5;
+    -fx-border-radius: .5;
+    -fx-border-color: black;
+    -fx-max-height: 600px;
+    -fx-max-width: 500px;
+    -fx-background-color: #202020;
+}
+
+.game-block {
+    -fx-alignment: center;
+    -fx-min-height: 140px;
+    -fx-min-width: 140px;
+    -fx-background-color: antiquewhite;
+    -fx-border-style: solid;
+    -fx-border-width: 0.5;
+    -fx-border-color: black;
+    -fx-animated: true;
+    -fx-text-fill: #b3b9c5;
+}
+
+.index-button {
+    -fx-min-width: 140px;
+    -fx-min-height: 70px;
+    -fx-background-color: lightgreen;
+    -fx-border-radius: 1.5%;
+    -fx-text-alignment: center;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+}
+
+.index-button:hover {
+    -fx-background-color: #70ee70;
+}
