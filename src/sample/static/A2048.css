@@ -1,3 +1,10 @@
+.background {
+    -fx-background-image: url("natural-paper-background.jpg");
+    -fx-background-repeat: repeat;
+    -fx-background-size: cover;
+    -fx-background-position: left;
+}
+
 .game-board {
     -fx-border-style: solid inside;
     -fx-border-width: 0.5;
@@ -28,8 +35,34 @@
     -fx-text-alignment: center;
     -fx-text-fill: white;
     -fx-font-size: 15px;
+    -fx-cursor: default;
 }
 
 .index-button:hover {
     -fx-background-color: #70ee70;
+    -fx-cursor: hand;
+}
+
+.home-button {
+    -fx-border-style: hidden;
+    -fx-border-radius: 1.5%;
+    -fx-background-color: transparent;
+    -fx-opacity: 75%;
+    -fx-cursor: default;
+}
+
+.home-button:hover {
+    -fx-opacity: 100%;
+    -fx-cursor: hand;
+}
+
+.instructions {
+    -fx-font-size: 17.5px;
+    -fx-font-family: Corbel;
+    -fx-min-width: inherit;
+    -fx-padding: 2.5px;
+    -fx-text-fill: #202020;
+    -fx-background-color: transparent;
+    -fx-wrap-text: true;
+    -fx-text-alignment: left;
 }
