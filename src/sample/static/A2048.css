@@ -2,7 +2,6 @@
     -fx-background-image: url("natural-paper-background.jpg");
     -fx-background-repeat: repeat;
     -fx-background-size: cover;
-    -fx-background-position: left;
 }
 
 .game-board {
@@ -60,7 +59,7 @@
     -fx-font-size: 17.5px;
     -fx-font-family: Corbel;
     -fx-min-width: inherit;
-    -fx-padding: 2.5px;
+    -fx-padding: 10px;
     -fx-text-fill: #202020;
     -fx-background-color: transparent;
     -fx-wrap-text: true;

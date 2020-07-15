@@ -9,6 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Index extends Application {
     Scene scene;
     @Override
@@ -58,11 +62,45 @@ public class Index extends Application {
         high_score.getStyleClass().add("index-button");
         high_score.setLayoutX(105);
         high_score.setLayoutY(520);
+        high_score.setOnMouseClicked(mouseEvent -> {
+            List<List<String>> temp = new ArrayList<>();
+            List<List<String>> temp1 = new ArrayList<>();
+            List<String> t = new ArrayList<>();
+            t.add("1");
+            t.add("Harsh");
+            t.add("1289670");
+            temp.add(t);
+            List<String> t1 = new ArrayList<>();
+            t1.add("2");
+            t1.add("Kaushal");
+            t1.add("128967");
+            temp.add(t1);
+            System.out.println(temp);
+            HighScore highScore = new HighScore();
+            stage.setScene(highScore.scene);
+            try {
+                highScore.WriteScores(temp);
+                temp1 = highScore.ReadScore();
+                System.out.println(temp1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            highScore.home_button.setOnMouseClicked(mouseEvent1 -> {
+                stage.setScene(scene);
+            });
+        });
 
         Button credits = new Button("Credits");
         credits.getStyleClass().add("index-button");
         credits.setLayoutX(255);
         credits.setLayoutY(520);
+        credits.setOnMouseClicked(mouseEvent -> {
+            Credits ins = new Credits();
+            stage.setScene(ins.scene);
+            ins.home_button.setOnMouseClicked(mouseEvent1 -> {
+                stage.setScene(scene);
+            });
+        });
 
         root.getChildren().addAll(title_image);
         root.getChildren().addAll(about, play, instructions, high_score, credits);
