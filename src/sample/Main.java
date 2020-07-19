@@ -27,6 +27,12 @@ public class Main extends Application {
         primaryStage.setTitle("2048");
         primaryStage.getIcons().add(new Image("sample/static/2048_logo.png"));
         final Group root = new Group();
+        root.getStyleClass().add("background");
+
+        Label heading = new Label("2048");
+        heading.setFont(Font.font(30));
+        heading.setPadding(new Insets(10,0,10,0));
+        root.getChildren().add(heading);
 
         number = movement.numberGeneration();
         block = movement.blockGeneration();
@@ -117,9 +123,10 @@ public class Main extends Application {
     public GridPane board() {
         GridPane gridPane = new GridPane();
         gridPane.getStyleClass().add("game-board");
-        gridPane.setPadding(new Insets(5));
-        gridPane.setVgap(10);
-        gridPane.setHgap(10);
+        gridPane.setPadding(new Insets(12, 12, 12, 12));
+        gridPane.setVgap(12);
+        gridPane.setHgap(12);
+        gridPane.setLayoutY(100);
         int k = 0;
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
@@ -179,6 +186,7 @@ public class Main extends Application {
             return "#191970";
         return "";
     }
+
     public static void main(String[] args) {
         launch(args);
     }

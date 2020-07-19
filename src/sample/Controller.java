@@ -1,4 +1,6 @@
 package sample;
+import javafx.scene.control.Control;
+
 import java.util.Random;
 
 public class Controller {
@@ -178,6 +180,46 @@ public class Controller {
             if ( grid[i] == 0 ) {
                 return false;
             }
+        }
+        for(int i = 12; i < 16; i++) {
+            boolean val = gameOverWithNoZero(i, i - 4, i - 8, i - 12);
+            if ( !val ) {
+                return false;
+            }
+        }
+        for(int i = 0; i <= 12; i += 4) {
+            boolean val = gameOverWithNoZero(i, i+1, i+2, i+3);
+            if ( !val ) {
+                return false;
+            }
+        }
+        for(int i = 3; i <= 15; i += 4) {
+            boolean val = gameOverWithNoZero(i, i-1, i-2, i-3);
+            if ( !val ) {
+                return false;
+            }
+        }
+        for(int i = 0; i <= 3; i++) {
+            boolean val = gameOverWithNoZero(i, i+4, i+8, i+12);
+            if ( !val ) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean gameOverWithNoZero(int i, int i1, int i2, int i3) {
+        if( getA(i) == getA(i1) && getA(i2) == getA(i3) ) {
+            return false;
+        }
+        if( getA(i) != getA(i1) && getA(i1) == getA(i2) ) {
+            return false;
+        }
+        if( getA(i) == getA(i1) && getA(i2) != getA(i3) ) {
+            return false;
+        }
+        if( getA(i) != getA(i1) && getA(i2) == getA(i3) ) {
+            return false;
         }
         return true;
     }

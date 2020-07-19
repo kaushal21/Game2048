@@ -8,20 +8,20 @@
     -fx-border-style: solid inside;
     -fx-border-width: 0.5;
     -fx-border-radius: .5;
-    -fx-border-color: black;
-    -fx-max-height: 600px;
+    -fx-border-color: #FFFFD2;
+    -fx-max-height: 500px;
     -fx-max-width: 500px;
     -fx-background-color: #202020;
 }
 
 .game-block {
     -fx-alignment: center;
-    -fx-min-height: 140px;
-    -fx-min-width: 140px;
+    -fx-min-height: 110px;
+    -fx-min-width: 110px;
     -fx-background-color: antiquewhite;
     -fx-border-style: solid;
     -fx-border-width: 0.5;
-    -fx-border-color: black;
+    -fx-border-color: green;
     -fx-animated: true;
     -fx-text-fill: #b3b9c5;
 }
@@ -50,7 +50,15 @@
     -fx-cursor: default;
 }
 
-.home-button:hover {
+.playscreen-home-button {
+    -fx-border-style: hidden;
+    -fx-border-radius: 1.5%;
+    -fx-background-color: transparent;
+    -fx-opacity: 75%;
+    -fx-cursor: default;
+}
+
+.home-button:hover playscreen-home-button:hover {
     -fx-opacity: 100%;
     -fx-cursor: hand;
 }

@@ -63,8 +63,6 @@ public class Instructions {
         home_icon.setFitWidth(50);
         home_icon.setFitHeight(50);
         home_button = new Button("", home_icon);
-        home_button.setLayoutX(185);
-        home_button.setLayoutY(500);
         home_button.getStyleClass().add("home-button");
         vBoxButton.getChildren().add(home_button);
 
