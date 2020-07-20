@@ -1,12 +1,23 @@
 package sample;
+import com.sun.marlin.stats.Histogram;
 import javafx.scene.control.Control;
 
+import java.util.List;
 import java.util.Random;
 
 public class Controller {
     long score;                          // It stores the score for the player.
     int[] a;                             // It stores the numbers present in the block from 0 to 15 in the board.
     int[] grid;                          // Stores 1 if the block id occupied, otherwise stores 0.
+    long highScore;
+
+    public long getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(long highScore) {
+        this.highScore = highScore;
+    }
 
     /**
      * Controller() initializes the board, and the score.
@@ -19,6 +30,15 @@ public class Controller {
             grid[i] = 0;
         }
         score = 0;
+        HighScore hS = new HighScore();
+        List<List<String>> temp = hS.ReadScore();
+        try {
+            List<String> ranker = temp.get(1);
+            this.highScore = Long.valueOf(ranker.get(2));
+        } catch (Exception e) {
+            this.highScore = 0;
+            e.printStackTrace();
+        }
     }
 
     /**

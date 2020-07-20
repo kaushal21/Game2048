@@ -4,15 +4,16 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+import java.io.BufferedReader;
 
 public class Main extends Application {
     boolean enterValidMove;
@@ -29,10 +30,22 @@ public class Main extends Application {
         final Group root = new Group();
         root.getStyleClass().add("background");
 
+        VBox vBox = new VBox();
+
         Label heading = new Label("2048");
         heading.setFont(Font.font(30));
+        heading.setStyle("-fx-font-family: 'Britannic Bold';");
         heading.setPadding(new Insets(10,0,10,0));
-        root.getChildren().add(heading);
+        vBox.getChildren().add(heading);
+
+        ImageView home_icon = new ImageView();
+        Image img = new Image("sample/static/home.png");
+        home_icon.setImage(img);
+        home_icon.setFitWidth(50);
+        home_icon.setFitHeight(50);
+        Button home_button = new Button("", home_icon);
+        home_button.getStyleClass().add("home-button");
+        vBox.getChildren().add(home_button);
 
         number = movement.numberGeneration();
         block = movement.blockGeneration();
@@ -113,7 +126,8 @@ public class Main extends Application {
 
                 if (movement.gameOver()) {
                     System.out.println("Final Score: " + movement.getScore());
-                    GameOver.gameOver(movement.getScore());
+                    GameOver gameOver = new GameOver();
+                    gameOver.gameOver(movement.getScore());
                     primaryStage.close();
                 }
             }

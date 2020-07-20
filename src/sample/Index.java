@@ -15,6 +15,8 @@ import java.util.List;
 
 public class Index extends Application {
     Scene scene;
+    boolean enterValidMove, invalidEntry;
+    int number, block;
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("2048");
@@ -45,6 +47,156 @@ public class Index extends Application {
         play.getStyleClass().add("index-button");
         play.setLayoutX(180);
         play.setLayoutY(440);
+        play.setOnMouseClicked(mouseEvent -> {
+            Movement movement = new Movement();
+            Game game = new Game(movement);
+
+            game.scene.setOnKeyReleased(event -> {
+                enterValidMove = false;
+                invalidEntry = false;
+                while (!enterValidMove) {
+                    switch (event.getCode()) {
+                        case ESCAPE:
+                            if (ConfirmationBox.confirmationBox("Are You Sure You Want To Quit?"))
+                                stage.close();
+                            invalidEntry = true;
+                            enterValidMove = true;
+                            break;
+                        case UP:
+                            String moveCheck = movement.up();
+                            if (moveCheck.equals("u")) {
+                                System.out.println("Enter A Valid Move");
+                                AlertBox.alertBox("Enter A Valid Move");
+                                invalidEntry = true;
+                            }
+                            enterValidMove = true;
+                            break;
+                        case DOWN:
+                            moveCheck = movement.down();
+                            if (moveCheck.equals("d")) {
+                                System.out.println("Enter A Valid Move");
+                                AlertBox.alertBox("Enter A Valid Move");
+                                invalidEntry = true;
+                            }
+                            enterValidMove = true;
+                            break;
+                        case LEFT:
+                            moveCheck = movement.left();
+                            if (moveCheck.equals("l")) {
+                                System.out.println("Enter A Valid Move");
+                                AlertBox.alertBox("Enter A Valid Move");
+                                invalidEntry = true;
+                            }
+                            enterValidMove = true;
+                            break;
+                        case RIGHT:
+                            moveCheck = movement.right();
+                            if (moveCheck.equals("r")) {
+                                System.out.println("Enter A Valid Move");
+                                AlertBox.alertBox("Enter A Valid Move");
+                                invalidEntry = true;
+                            }
+                            enterValidMove = true;
+                            break;
+                        default:
+                            System.out.println("Enter A Valid Move");
+                            AlertBox.alertBox("Enter A Valid Move");
+                            invalidEntry = true;
+                            enterValidMove = true;
+                            break;
+                    }
+                }
+                if (!invalidEntry) {
+                    game.root.getChildren().remove(game.gridPane);
+                    number = movement.numberGeneration();
+                    block = movement.blockGeneration();
+                    movement.setA(block, number);
+                    movement.setGrid(block);
+                    game.gridPane = game.board(movement);
+                    game.root.getChildren().add(game.gridPane);
+                    game.yourScoreNumber.setText(Long.toString(movement.getScore()));
+                    if ( movement.getScore() > movement.getHighScore() ) {
+                        game.highScoreNumber.setText(Long.toString(movement.getScore()));
+                    }
+
+                    if (movement.gameOver()) {
+                        System.out.println("Final Score: " + movement.getScore());
+                        GameOver gameOver = new GameOver();
+                        gameOver.gameOver(movement.getScore());
+                        HighScore hs = new HighScore();
+                        List<List<String>> list = hs.ReadScore();
+                        List<List<String>> finalList = new ArrayList<>();
+                        if ( list.size() - 1 == 0 ) {
+                            List<String> temp = new ArrayList<>();
+                            temp.add("1");
+                            temp.add(gameOver.givenName);
+                            temp.add(Long.toString(movement.getScore()));
+                            finalList.add(temp);
+                            try {
+                                hs.WriteScores(finalList);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            int i1 = 0;
+                            long[] score = new long[list.size() - 1];
+                            String[] name = new String[list.size() - 1];
+                            for (List<String> temp : list) {
+                                if (i1 != 0) {
+                                    score[i1 - 1] = Long.valueOf(temp.get(2));
+                                    name[i1 - 1] = temp.get(1);
+                                }
+                                i1++;
+                            }
+                            for (int i = 0; i < list.size() - 1; i++) {
+                                System.out.println(i + 1 + ". " + name[i] + " " + score[i]);
+                            }
+                            int k = 0;
+                            for (int i = 0; i < list.size() - 1 && i < 10; i++) {
+                                List<String> listRow = new ArrayList<>();
+                                listRow.add(String.valueOf(i + 1));
+                                if (movement.score > score[k]) {
+                                    if (gameOver.givenName.equals(""))
+                                        listRow.add("Anonymous");
+                                    else
+                                        listRow.add(gameOver.givenName);
+                                    listRow.add(String.valueOf(movement.score));
+                                    System.out.println(listRow);
+                                    finalList.add(listRow);
+
+                                    for (int j = i; j < list.size() - 1 && j < 10; j++) {
+                                        List<String> listRow2 = new ArrayList<>();
+                                        listRow2.add(String.valueOf(j + 1));
+                                        listRow2.add(name[k]);
+                                        listRow2.add(Long.toString(score[k]));
+                                        System.out.println(listRow);
+                                        finalList.add(listRow2);
+                                        k++;
+                                    }
+                                    break;
+                                } else {
+                                    listRow.add(name[k]);
+                                    listRow.add(Long.toString(score[k]));
+                                    System.out.println(listRow);
+                                    k++;
+                                }
+                            }
+                            System.out.println(finalList);
+                            try {
+                                hs.WriteScores(finalList);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        stage.setScene(scene);
+                    }
+                }
+            });
+            stage.setScene(game.scene);
+            game.home_button.setOnMouseClicked(mouseEvent1 -> {
+                stage.setScene(scene);
+            });
+        });
 
         Button instructions = new Button("Instructions");
         instructions.getStyleClass().add("index-button");
@@ -63,28 +215,8 @@ public class Index extends Application {
         high_score.setLayoutX(105);
         high_score.setLayoutY(520);
         high_score.setOnMouseClicked(mouseEvent -> {
-            List<List<String>> temp = new ArrayList<>();
-            List<List<String>> temp1 = new ArrayList<>();
-            List<String> t = new ArrayList<>();
-            t.add("1");
-            t.add("Harsh");
-            t.add("1289670");
-            temp.add(t);
-            List<String> t1 = new ArrayList<>();
-            t1.add("2");
-            t1.add("Kaushal");
-            t1.add("128967");
-            temp.add(t1);
-            System.out.println(temp);
             HighScore highScore = new HighScore();
             stage.setScene(highScore.scene);
-            try {
-                highScore.WriteScores(temp);
-                temp1 = highScore.ReadScore();
-                System.out.println(temp1);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             highScore.home_button.setOnMouseClicked(mouseEvent1 -> {
                 stage.setScene(scene);
             });

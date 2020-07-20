@@ -58,7 +58,7 @@
     -fx-cursor: default;
 }
 
-.home-button:hover playscreen-home-button:hover {
+.home-button:hover, playscreen-home-button:hover {
     -fx-opacity: 100%;
     -fx-cursor: hand;
 }
@@ -72,4 +72,13 @@
     -fx-background-color: transparent;
     -fx-wrap-text: true;
     -fx-text-alignment: left;
+}
+
+.score {
+    -fx-font-size: 17.5px;
+    -fx-alignment: center;
+    -fx-padding: 5px;
+    -fx-background-color: #f3f9f5;
+    -fx-min-width: 110px;
+    -fx-min-height: 40px;
 }
