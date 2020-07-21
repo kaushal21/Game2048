@@ -27,28 +27,55 @@ The game can only last a finite amount of moves, and the theoretical limit for t
 
 ### Index
 
-This Page gives the options to the user to know a little more about the game, the instructions and the high scores stored.
+This Page gives the options to the user to know a little more about the game before starting example instructions and previous the high scores stored.
 With the Option to play it also shows a credit section which displays my motivation to develop this game.
+
+![Index Page](assets/2048index.png)
 
 ### About
 
-This section show what the game is all about.
+This section show what the game is all about. How the game proceeds and what is our aim in this game.
+
+![About Page](assets/2048about.png)
 
 ### Instruction
 
-This section gives the rules to play the game. It displays the rules that need to be followed and how th game functions.
+This section gives the rules to play the game. It displays the rules that need to be followed in order to play the game functions.
+
+![Instruction Page](assets/2048instructions.png)
 
 ### High Score
 
 The game stores the highscores of the player in a temporary file. It is done so that next time the players has a high score to beat.
 
+![High Score Page](assets/2048highscore.png)
+
 ### Credit
 
 This section gives my motivation of developing the game. It also shows my LinkdeIn profile link that maybe used to connect.
+
+![Credits Page](assets/2048credits.png)
 
 ### Playing The Game
 
 There is a scoreboard on the top right side of the screen with the highscore.
 While playing the game, use the arrow keys to move in UP, DOWN, RIGHT and LEFT direction.
 
+The Starting Grid of the game looks like the image given below:
+
+![Game Start Page](assets/2048playstart.png)
+
+While playing the game, if the player is trying to make a non valid move then an alert message is shown as follows:
+
+![Enter A Valid Move Dailog Box](assets/2048entervalidmove.png)
+
+When there is no possible move left then, a game over message is shown in a dailog box.
+Here the player can enter there name so that the score can be stored if it is higher then the previous scores.
+
+![Game Over Dailog Box](assets/2048gameover.png)
+
+If there is any error, or I can improve anything then please let me know. 
+It was a fun experience developing this game and I will keep on working projects like this.
+
+#### Thank You
 
