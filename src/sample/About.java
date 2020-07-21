@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 public class About {
     public Scene scene;
@@ -35,33 +36,37 @@ public class About {
         heading.setPadding(new Insets(10,0,10,0));
         vBoxHeading.getChildren().add(heading);
 
-        Label point1 = new Label("- This Game is a replica of original 2048 Game");
-        point1.getStyleClass().add("instructions");
-        point1.setMinWidth(500);
-        point1.setAlignment(Pos.CENTER_LEFT);
+        String[] points = {
+                "> \t2048 is played on a gray 4×4 grid, with numbered tiles that " +
+                        "\nslide when a player moves them using the four arrow keys.",
+                "> \tEvery turn, a new tile will randomly appear in an empty spot" +
+                        "\non the board with a value of either 2 or 4.",
+                "> \tTiles slide as far as possible in the chosen direction until" +
+                        "\nthey are stopped by either another tile or the edge of the grid.",
+                "> \tIf two tiles of the same number collide while moving, they " +
+                        "\nwill merge into a tile with the total value of the two " +
+                        "\ntiles that collided.",
+                "> \tIf all four spaces in a row or column are filled with tiles " +
+                        "\nof the same value, a move parallel to that row/column will " +
+                        "\ncombine the first two and last two.",
+                "> \tA scoreboard on the upper-right keeps track of the user's score.",
+                "> \tThe user's score starts at zero, and is increased whenever two " +
+                        "\ntiles combine, by the value of the new tile.",
+                "> \tAs with many arcade games, the user's high score is shown " +
+                        "\nalongside the current score."
+        };
 
-        Label point2 = new Label("- Add two similar tile next to each other to make highest possible tile");
-        point2.getStyleClass().add("instructions");
-        point2.setMinWidth(500);
-        point2.setAlignment(Pos.CENTER_LEFT);
-
-        Label point3 = new Label("- There are 4 possible moves: UP, DOWN, RIGHT, LEFT");
-        point3.getStyleClass().add("instructions");
-        point3.setMinWidth(500);
-        point3.setAlignment(Pos.CENTER_LEFT);
-
-        Label point4 = new Label("- Make move to get the highest possible score");
-        point4.getStyleClass().add("instructions");
-        point4.setMinWidth(500);
-        point4.setAlignment(Pos.CENTER_LEFT);
-
-        Label all_the_best = new Label("All The Best!!!");
-        all_the_best.setFont(Font.font(25));
-        all_the_best.setMinWidth(500);
-        all_the_best.setAlignment(Pos.CENTER);
-        all_the_best.setPadding(new Insets(50, 0, 0, 0));
-
-        vBoxHeading.getChildren().addAll(point1, point2, point3, point4, all_the_best);
+        for(int i = 0; i < points.length; i++) {
+            Label point = new Label(points[i]);
+            point.setMaxWidth(500);
+            point.setPadding(new Insets(2.5, 0, 2.5, 10));
+            point.setWrapText(true);
+            point.setStyle("    -fx-font-size: 17.5px;\n" +
+                    "    -fx-font-family: Corbel;\n" +
+                    "    -fx-min-width: inherit;\n" +
+                    "    -fx-text-fill: #202020;\n");
+            vBoxHeading.getChildren().add(point);
+        }
 
         ImageView home_icon = new ImageView();
         Image img = new Image("sample/static/home.png");
