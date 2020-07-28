@@ -101,9 +101,9 @@ public class HighScore {
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
                 // use comma as separator
-                String[] country = line.split(cvsSplitBy);
+                String[] c = line.split(cvsSplitBy);
                 List<String> tempList = new ArrayList<>();
-                for(String t: country)
+                for (String t : c)
                     tempList.add(t);
                 finalList.add(tempList);
             }

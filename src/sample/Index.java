@@ -125,11 +125,15 @@ public class Index extends Application {
                         gameOver.gameOver(movement.getScore());
                         HighScore hs = new HighScore();
                         List<List<String>> list = hs.ReadScore();
+                        System.out.println(list);
                         List<List<String>> finalList = new ArrayList<>();
                         if ( list.size() - 1 == 0 ) {
                             List<String> temp = new ArrayList<>();
                             temp.add("1");
-                            temp.add(gameOver.givenName);
+                            if (gameOver.givenName.equals(""))
+                                temp.add("Anonymous");
+                            else
+                                temp.add(gameOver.givenName);
                             temp.add(Long.toString(movement.getScore()));
                             finalList.add(temp);
                             try {
@@ -151,11 +155,12 @@ public class Index extends Application {
                             for (int i = 0; i < list.size() - 1; i++) {
                                 System.out.println(i + 1 + ". " + name[i] + " " + score[i]);
                             }
-                            int k = 0;
-                            for (int i = 0; i < list.size() - 1 && i < 10; i++) {
+                            int k = 0, i;
+                            boolean added = false;
+                            for (i = 0; i < list.size() - 1 && i < 9; i++) {
                                 List<String> listRow = new ArrayList<>();
                                 listRow.add(String.valueOf(i + 1));
-                                if (movement.score > score[k]) {
+                                if (movement.score > score[k] && !added ) {
                                     if (gameOver.givenName.equals(""))
                                         listRow.add("Anonymous");
                                     else
@@ -163,21 +168,34 @@ public class Index extends Application {
                                     listRow.add(String.valueOf(movement.score));
                                     System.out.println(listRow);
                                     finalList.add(listRow);
-
-                                    for (int j = i; j < list.size() - 1 && j < 10; j++) {
-                                        List<String> listRow2 = new ArrayList<>();
-                                        listRow2.add(String.valueOf(j + 1));
-                                        listRow2.add(name[k]);
-                                        listRow2.add(Long.toString(score[k]));
-                                        System.out.println(listRow);
-                                        finalList.add(listRow2);
-                                        k++;
-                                    }
-                                    break;
+                                    added = true;
                                 } else {
                                     listRow.add(name[k]);
                                     listRow.add(Long.toString(score[k]));
                                     System.out.println(listRow);
+                                    finalList.add(listRow);
+                                    k++;
+                                }
+                            }
+                            if ( i < 9 && !added ) {
+                                List<String> listRow = new ArrayList<>();
+                                listRow.add(String.valueOf(i + 1));
+                                if (gameOver.givenName.equals(""))
+                                    listRow.add("Anonymous");
+                                else
+                                    listRow.add(gameOver.givenName);
+                                listRow.add(String.valueOf(movement.score));
+                                System.out.println(listRow);
+                                finalList.add(listRow);
+                            }
+                            if ( i < list.size() - 1 ) {
+                                for (;i < list.size() - 1 && i < 9; i++) {
+                                    List<String> listRow = new ArrayList<>();
+                                    listRow.add(String.valueOf(i + 1));
+                                    listRow.add(name[k]);
+                                    listRow.add(Long.toString(score[k]));
+                                    System.out.println(listRow);
+                                    finalList.add(listRow);
                                     k++;
                                 }
                             }

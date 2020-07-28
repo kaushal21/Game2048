@@ -32,7 +32,7 @@ public class GameOver {
         name.setPadding(new Insets(10, 0, 10, 0));
         name.setMinWidth(200);
         name.setMinHeight(25);
-        exit = new Button("Exit");                            // Create a Submit button
+        exit = new Button("Submit");                            // Create a Submit button
         exit.setOnAction(e -> {
             givenName = name.getText();
             newWindow.close();
