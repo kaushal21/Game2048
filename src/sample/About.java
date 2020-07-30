@@ -2,40 +2,42 @@ package sample;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 
 public class About {
-    public Scene scene;
-    public Button home_button;
+    public Scene scene;                             // Contains the Main Scene for this page
+    public Button home_button;                      // Home Button which take this page back to index
     public About() {
+        // Main root Vertical Box, that Contains every element in this page
         VBox root = new VBox();
         root.getStyleClass().add("background");
         root.setMinWidth(500);
         root.setMinHeight(600);
 
+        // Vertical Box that stores the heading of the Page and the body of the page
         VBox vBoxHeading = new VBox();
         vBoxHeading.setMinWidth(500);
         vBoxHeading.setMinHeight(525);
         vBoxHeading.setAlignment(Pos.TOP_CENTER);
 
+        // Vertical Box that stores the Home Button
         VBox vBoxButton = new VBox();
         vBoxButton.setMinWidth(500);
         vBoxButton.setAlignment(Pos.TOP_CENTER);
 
+        // Label for the Heading
         Label heading = new Label("About");
         heading.setFont(Font.font(30));
         heading.setPadding(new Insets(10,0,10,0));
         vBoxHeading.getChildren().add(heading);
 
+        // Points about the Game
         String[] points = {
                 "> \t2048 is played on a gray 4×4 grid, with numbered tiles that " +
                         "\nslide when a player moves them using the four arrow keys.",
@@ -56,6 +58,7 @@ public class About {
                         "\nalongside the current score."
         };
 
+        // Using for loop to Create label for each point in this page
         for(int i = 0; i < points.length; i++) {
             Label point = new Label(points[i]);
             point.setMaxWidth(500);
@@ -68,6 +71,7 @@ public class About {
             vBoxHeading.getChildren().add(point);
         }
 
+        // Creating the Home Button with an Image
         ImageView home_icon = new ImageView();
         Image img = new Image("sample/static/home.png");
         home_icon.setImage(img);
@@ -77,6 +81,7 @@ public class About {
         home_button.getStyleClass().add("home-button");
         vBoxButton.getChildren().add(home_button);
 
+        // Adding the Heading and Button to the root
         root.getChildren().addAll(vBoxHeading, vBoxButton);
         scene = new Scene(root, 500, 600);
         scene.getStylesheets().add("sample/static/A2048.css");

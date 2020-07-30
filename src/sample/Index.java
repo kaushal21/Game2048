@@ -19,11 +19,13 @@ public class Index extends Application {
     int number, block;
     @Override
     public void start(Stage stage) throws Exception {
+        // Set the Title of the main screen
         stage.setTitle("2048");
         stage.getIcons().add(new Image("sample/static/2048_logo.png"));
         StackPane stackPane = new StackPane();
         Group root = new Group();
 
+        // Image/GIF on the index screen
         ImageView title_image = new ImageView();
         Image img = new Image("sample/static/2048_animation2.gif");
         title_image.setImage(img);
@@ -31,6 +33,7 @@ public class Index extends Application {
         title_image.setFitWidth(430);
         title_image.setX(35);
 
+        // Creating a Button "About"
         Button about = new Button("About");
         about.getStyleClass().add("index-button");
         about.setLayoutX(30);
@@ -43,6 +46,7 @@ public class Index extends Application {
             });
         });
 
+        // Creating a Button "Play"
         Button play = new Button("Play");
         play.getStyleClass().add("index-button");
         play.setLayoutX(180);
@@ -216,6 +220,7 @@ public class Index extends Application {
             });
         });
 
+        // Creating a Button "Instructions"
         Button instructions = new Button("Instructions");
         instructions.getStyleClass().add("index-button");
         instructions.setLayoutX(330);
@@ -228,6 +233,7 @@ public class Index extends Application {
             });
         });
 
+        // Creating a Button "High Score"
         Button high_score = new Button("High Score");
         high_score.getStyleClass().add("index-button");
         high_score.setLayoutX(105);
@@ -240,6 +246,7 @@ public class Index extends Application {
             });
         });
 
+        // Creating a Button "Credits"
         Button credits = new Button("Credits");
         credits.getStyleClass().add("index-button");
         credits.setLayoutX(255);
@@ -252,6 +259,7 @@ public class Index extends Application {
             });
         });
 
+        // Adding all the Buttons and images on the main screen i.e. root
         root.getChildren().addAll(title_image);
         root.getChildren().addAll(about, play, instructions, high_score, credits);
         stackPane.getChildren().add(root);

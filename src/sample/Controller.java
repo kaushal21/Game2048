@@ -11,16 +11,8 @@ public class Controller {
     int[] grid;                          // Stores 1 if the block id occupied, otherwise stores 0.
     long highScore;
 
-    public long getHighScore() {
-        return highScore;
-    }
-
-    public void setHighScore(long highScore) {
-        this.highScore = highScore;
-    }
-
     /**
-     * Controller() initializes the board, and the score.
+     * Controller() initializes the board, the score and the read the high score from the csv.
      */
     public Controller() {
         a = new int[16];
@@ -65,6 +57,13 @@ public class Controller {
     }
 
     /**
+     * @return the High score that was read from the csv.
+     */
+    public long getHighScore() {
+        return highScore;
+    }
+
+    /**
      * @param x the location of new block
      * @param val the value to for the new block
      */
@@ -105,93 +104,6 @@ public class Controller {
     }
 
     /**
-     * Returns the 'x' and 'y' coordinate for the generated block
-     * @param block the newly generated block where we will place a new number
-     * @return int[] of x at index 0, and y at index 1. if the block is out of range then return -1, -1.
-     */
-    public int[] gridLocation(int block) {
-        int[] location = new int[2];
-        switch ( block ) {
-            case 0:
-                // location: (0, 0)
-                return location;
-            case 1:
-                // location: (0, 1)
-                location[1] = 1;
-                return location;
-            case 2:
-                // location: (0, 2)
-                location[1] = 2;
-                return location;
-            case 3:
-                // location: (0, 3)
-                location[1] = 3;
-                return location;
-            case 4:
-                // location: (1, 0)
-                location[0] = 1;
-                return location;
-            case 5:
-                // location: (1, 1)
-                location[0] = 1;
-                location[1] = 1;
-                return location;
-            case 6:
-                // location: (1, 2)
-                location[0] = 1;
-                location[1] = 2;
-                return location;
-            case 7:
-                // location: (1, 3)
-                location[0] = 1;
-                location[1] = 3;
-                return location;
-            case 8:
-                // location: (2, 0)
-                location[0] = 2;
-                return location;
-            case 9:
-                // location: (2, 1)
-                location[0] = 2;
-                location[1] = 1;
-                return location;
-            case 10:
-                // location: (2, 2)
-                location[0] = 2;
-                location[1] = 2;
-                return location;
-            case 11:
-                // location: (2, 3)
-                location[0] = 2;
-                location[1] = 3;
-                return location;
-            case 12:
-                // location: (3, 0)
-                location[0] = 3;
-                return location;
-            case 13:
-                // location: (3, 1)
-                location[0] = 3;
-                location[1] = 1;
-                return location;
-            case 14:
-                // location: (3, 2)
-                location[0] = 3;
-                location[1] = 2;
-                return location;
-            case 15:
-                // location: (3, 3)
-                location[0] = 3;
-                location[1] = 3;
-                return location;
-        }
-        // location: (-1, -1)
-        location[0] = -1;
-        location[1] = -1;
-        return location;
-    }
-
-    /**
      * Game Over Function
      * @return true if there is no empty space in the board i.e. Game Over, otherwise it returns false.
      */
@@ -228,6 +140,14 @@ public class Controller {
         return true;
     }
 
+    /**
+     * This function checks if there are same number in the neighbouring blocks or not
+     * @param i Block Number for the first Block in row or column
+     * @param i1 Block Number for the second Block in row or column
+     * @param i2 Block Number for the third Block in row or column
+     * @param i3 Block Number for the fourth Block in row or column
+     * @return true if there is no possible move, otherwise it returns false.
+     */
     public boolean gameOverWithNoZero(int i, int i1, int i2, int i3) {
         if( getA(i) == getA(i1) && getA(i2) == getA(i3) ) {
             return false;
@@ -284,19 +204,5 @@ public class Controller {
      */
     public void updateScore(int addingValue) {
         score += addingValue;
-    }
-
-    public void display() {
-        int k = 0, l = 0;
-        for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                System.out.print(a[k++]+" ");
-            }
-            System.out.print("\t\t\t");
-            for(int j = 0; j < 4; j++) {
-                System.out.print(grid[l++]+" ");
-            }
-            System.out.println();
-        }
     }
 }

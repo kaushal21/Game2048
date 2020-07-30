@@ -12,28 +12,33 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 public class Instructions {
-    public Scene scene;
-    public Button home_button;
+    public Scene scene;                                 // Contains the Main Scene for this page
+    public Button home_button;                          // Home Button which take this page back to index
     public Instructions() {
+        // Main root Vertical Box, that Contains every element in this page
         VBox root = new VBox();
         root.getStyleClass().add("background");
         root.setMinWidth(500);
         root.setMinHeight(600);
 
+        // Vertical Box that stores the heading of the Page and the body of the page
         VBox vBoxHeading = new VBox();
         vBoxHeading.setMinWidth(500);
         vBoxHeading.setMinHeight(525);
         vBoxHeading.setAlignment(Pos.TOP_CENTER);
 
+        // Vertical Box that stores the Home Button
         VBox vBoxButton = new VBox();
         vBoxButton.setMinWidth(500);
         vBoxButton.setAlignment(Pos.TOP_CENTER);
 
+        // Label for the Heading
         Label heading = new Label("Instructions");
         heading.setFont(Font.font(30));
         heading.setPadding(new Insets(10,0,10,0));
         vBoxHeading.getChildren().add(heading);
 
+        // Rules for playing the Game
         String[] rules = {
                 "> \tUse Arrow key to move tile in UP, DOWN, RIGHT and LEFT direction.",
                 "> \tUse ESC key to exit the game.",
@@ -42,6 +47,7 @@ public class Instructions {
                 "> \tTile's with only same numbers combined together."
         };
 
+        // Using for loop to Create label for each point in this page
         for(int i = 0; i < rules.length; i++) {
             Label rule = new Label(rules[i]);
             rule.setMaxWidth(500);
@@ -56,6 +62,7 @@ public class Instructions {
             vBoxHeading.getChildren().add(rule);
         }
 
+        // Creating the Home Button with an Image
         ImageView home_icon = new ImageView();
         Image img = new Image("sample/static/home.png");
         home_icon.setImage(img);
@@ -65,6 +72,7 @@ public class Instructions {
         home_button.getStyleClass().add("home-button");
         vBoxButton.getChildren().add(home_button);
 
+        // Adding the Heading and Button to the root
         root.getChildren().addAll(vBoxHeading, vBoxButton);
         scene = new Scene(root, 500, 600);
         scene.getStylesheets().add("sample/static/A2048.css");

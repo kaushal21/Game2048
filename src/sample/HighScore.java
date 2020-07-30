@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,50 +13,58 @@ import javafx.scene.text.Font;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HighScore {
-    public Scene scene;
-    public Button home_button;
+    public Scene scene;                             // Contains the Main Scene for this page
+    public Button home_button;                      // Home Button which take this page back to index
     public HighScore() {
+        // Main root Vertical Box, that Contains every element in this page
         VBox root = new VBox();
         root.getStyleClass().add("background");
         root.setMinWidth(500);
         root.setMinHeight(600);
 
+        // Vertical Box that stores the heading of the Page and the body of the page
         VBox vBoxHeading = new VBox();
         vBoxHeading.setMinWidth(500);
         vBoxHeading.setMinHeight(525);
         vBoxHeading.setAlignment(Pos.TOP_CENTER);
 
+        // Vertical Box that stores the Home Button
         VBox vBoxButton = new VBox();
         vBoxButton.setMinWidth(500);
         vBoxButton.setAlignment(Pos.TOP_CENTER);
 
+        // Label for the Heading
         Label heading = new Label("High Score");
         heading.setFont(Font.font(30));
         heading.setPadding(new Insets(10,0,10,0));
         vBoxHeading.getChildren().add(heading);
 
+        // Creating a VBox for displaying the list of the HighScore
         VBox listBox = new VBox();
-        // ObservableList name = FXCollections.observableArrayList();
-        List<List<String>> scores = ReadScore();
+        List<List<String>> scores = ReadScore();                // Read the List of HighScores from the CSV
         int i1 = 0;
+        // Iterate through the list of HighScores
         for(List<String> temp: scores) {
-            HBox listItem = new HBox();
+            HBox listItem = new HBox();                         // Create a HBox for stating a single row of the list
+
+            // Label for the Rank form the List
             Label rank = new Label(temp.get(0));
             rank.setMinWidth(60);
             rank.setAlignment(Pos.CENTER);
             rank.getStyleClass().add("instructions");
             rank.setPadding(new Insets(5, 15, 5, 5));
 
+            // Label for the Name from the List
             Label name = new Label(temp.get(1));
             name.setMinWidth(110);
             name.setAlignment(Pos.CENTER);
             name.getStyleClass().add("instructions");
             name.setPadding(new Insets(5, 15, 5, 25));
 
+            // Label for the Score from the List
             Label score = new Label(temp.get(2));
             score.setMinWidth(110);
             score.setAlignment(Pos.CENTER);
@@ -70,12 +76,14 @@ public class HighScore {
                 score.setStyle("-fx-font-weight: bold;");
             }
 
+            // Add the row to the final displaying VBox
             listItem.getChildren().addAll(rank, name, score);
             listBox.getChildren().add(listItem);
             i1++;
         }
         vBoxHeading.getChildren().add(listBox);
 
+        // Creating the Home Button with an Image
         ImageView home_icon = new ImageView();
         Image image = new Image("sample/static/home.png");
         home_icon.setImage(image);
@@ -85,11 +93,16 @@ public class HighScore {
         home_button.getStyleClass().add("home-button");
         vBoxButton.getChildren().add(home_button);
 
+        // Adding the Heading and Button to the root
         root.getChildren().addAll(vBoxHeading, vBoxButton);
         scene = new Scene(root, 500, 600);
         scene.getStylesheets().add("sample/static/A2048.css");
     }
 
+    /**
+     * Reading the list from the CSV file "highScore"
+     * @return List of List of String which was there is "highScore.csv"
+     */
     public List<List<String>> ReadScore() {
         String csvFile = "highScore.csv";
         BufferedReader br = null;
@@ -123,6 +136,11 @@ public class HighScore {
         return finalList;
     }
 
+    /**
+     * This Functions write back to the CSV file the list that is passed on
+     * @param newScore It the List of highscores which is updated after the game
+     * @throws IOException It is thrown if the file is not found
+     */
     public void WriteScores(List<List<String>> newScore) throws IOException {
         FileWriter csvWriter = new FileWriter("highScore.csv");
         csvWriter.append("Rank");

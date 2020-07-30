@@ -1,35 +1,62 @@
 package sample;
 
 public class Movement extends Controller{
-    private int x6;
+    private int x6;                                 // Used for checking the edge cases
 
+    /**
+     * Used when the down Operation is called.
+     * @return "d" if the operation is valid, otherwise it returns "n"
+     */
     public String down() {
         x6 = 0;
+        // Loop for the block number 12, 13, 14 and 15
         for(int i = 12; i < 16; i++)
+            // Check the blocks in each column in bottom to top manner
             checkZerosInListOfBlocks(i, i-4, i-8, i-12);
         if ( x6 == 4 )
             return "d";
         return "n";
     }
+
+    /**
+     * Used when the left Operation is called.
+     * @return "l" if the operation is valid, otherwise it returns "n"
+     */
     public String left() {
         x6 = 0;
+        // Loop for the block number 0, 4, 8 and 12
         for(int i = 0; i <= 12; i += 4)
+            // Check the blocks in each row in left to right manner
             checkZerosInListOfBlocks(i, i+1, i+2, i+3);
         if ( x6 == 4 )
             return "l";
         return "n";
     }
+
+    /**
+     * Used when the right Operation is called.
+     * @return "r" if the operation is valid, otherwise it returns "n"
+     */
     public String right() {
         x6 = 0;
+        // Loop for the block number 3, 7, 11 and 15
         for(int i = 3; i <= 15; i += 4)
+            // Check the blocks in each row in right to left manner
             checkZerosInListOfBlocks(i, i-1, i-2, i-3);
         if ( x6 == 4 )
             return "r";
         return "n";
     }
+
+    /**
+     * Used when the up Operation is called.
+     * @return "u" if the operation is valid, otherwise it returns "n"
+     */
     public String up() {
         x6 = 0;
+        // Loop for the block number 0, 1, 2 and 3
         for(int i = 0; i <= 3; i++)
+            // Check the blocks in each column in top to bottom manner
             checkZerosInListOfBlocks(i, i+4, i+8, i+12);
         if ( x6 == 4 )
             return "u";

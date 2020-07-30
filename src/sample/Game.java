@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,24 +12,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class Game {
-    public Scene scene;
-    GridPane gridPane;
-    int number, block;
-    Group root = new Group();
-    Button home_button, highScoreNumber, yourScoreNumber;
+    public Scene scene;                             // Contains the Main Scene for the Game Page
+    GridPane gridPane;                              // Holds the Grid for the 4x4 board
+    int number, block;                              // Holds the new generated number and a empty Block number
+    Group root = new Group();                       // Contains all the objects on the screen
+    Button home_button, highScoreNumber, yourScoreNumber;   // Button for going to home screen, holding highscore and current score
     public Game(Movement movement) {
-        root.getStyleClass().add("background");
+        root.getStyleClass().add("background");     // Adding Background class to the root
 
-        VBox vBox = new VBox();
-        vBox.setMinHeight(100);
-        vBox.setMaxHeight(100);
-        vBox.setMinWidth(500);
-
+        // Label for the Heading
         Label heading = new Label("2048");
         heading.setFont(Font.font(30));
         heading.setStyle("-fx-font-family: 'Britannic Bold';");
         heading.setPadding(new Insets(10,0,0,0));
 
+        // Label for the High Score
         Label highScore = new Label("High Score");
         highScore.setFont(Font.font(20));
         highScore.setStyle("-fx-font-family: 'Comic Sans MS';");
@@ -38,6 +34,7 @@ public class Game {
         highScore.setLayoutX(250);
         highScore.setLayoutY(0);
 
+        // Label for the Your Score
         Label currentScore = new Label("Your Score");
         currentScore.setFont(Font.font(20));
         currentScore.setStyle("-fx-font-family: 'Comic Sans MS';");
@@ -45,8 +42,10 @@ public class Game {
         currentScore.setLayoutX(366);
         currentScore.setLayoutY(0);
 
+        // Adding all the Labels on the screen
         root.getChildren().addAll(heading, highScore, currentScore);
 
+        // Creating the Home Button with an Image
         ImageView home_icon = new ImageView();
         Image img = new Image("sample/static/home.png");
         home_icon.setImage(img);
@@ -57,29 +56,37 @@ public class Game {
         home_button.setLayoutX(0);
         home_button.setLayoutY(50);
 
+        // Creating the Button for showing the High Score
         highScoreNumber = new Button(Long.toString(movement.getHighScore()));
         highScoreNumber.getStyleClass().add("score");
         highScoreNumber.setLayoutX(250);
         highScoreNumber.setLayoutY(50);
 
+        // Creating the Button for showing your current score
         yourScoreNumber = new Button(Long.toString(movement.getScore()));
         yourScoreNumber.getStyleClass().add("score");
         yourScoreNumber.setLayoutX(366);
         yourScoreNumber.setLayoutY(50);
 
+        // Adding all the Buttons on the screen
         root.getChildren().addAll(home_button, highScoreNumber, yourScoreNumber);
 
-        number = movement.numberGeneration();
-        block = movement.blockGeneration();
-        movement.setA(block, number);
-        movement.setGrid(block);
-        gridPane = board(movement);
-        root.getChildren().add(gridPane);
+        number = movement.numberGeneration();                   // Generating a random number
+        block = movement.blockGeneration();                     // Generating an empty block number
+        movement.setA(block, number);                           // Set the Block with the newly generated number as 1 in A
+        movement.setGrid(block);                                // Set the Block with the newly generated number as the Number in Grid
+        gridPane = board(movement);                             // Create a board
+        root.getChildren().add(gridPane);                       // Add the board to the root
 
         scene = new Scene(root, 500, 600);
         scene.getStylesheets().add("sample/static/A2048.css");
     }
 
+    /**
+     * This Function generates the board which is a Gridpane of 4x4 in size
+     * @param movement object of Movement Class which holds the game's grid, score and A.
+     * @return the Gridpane which is the graphical representation of the grid in movement
+     */
     public GridPane board(Movement movement) {
         GridPane gridPane = new GridPane();
         gridPane.getStyleClass().add("game-board");
@@ -107,6 +114,11 @@ public class Game {
         return gridPane;
     }
 
+    /**
+     * This function returns the Block color for the passed integer.
+     * @param tile the number whose color is needed to be decided
+     * @return the color code for the passed integer
+     */
     public String blockColor(int tile) {
         if ( tile == 2 )
             return "#FAFAD2";
